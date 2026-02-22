@@ -12,9 +12,9 @@ export default {
         sans: ['Sora', ...defaultTheme.fontFamily.sans]
       },
       colors: {
-        lightModeBg: '#E6E6E6',
-        darkModeBg: '#1A1A1A',
-        accentColor: '#A682FF',
+        lightModeBg: '#6dceff',
+        darkModeBg: '#000132',
+        accentColor: '#e6e6e6',
         lightModeText: 'black',
         darkModeText: 'white'
       },
