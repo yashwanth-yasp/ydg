@@ -24,5 +24,6 @@ export default defineConfig({
     mdx(),
     react()
   ],
-  site: 'https://localhost:4321',
+  site: 'https://yashwanth-yasp.github.io',
+  base: '/yashwanth-yasp.github.io',
 })
