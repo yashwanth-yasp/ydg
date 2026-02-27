@@ -25,4 +25,5 @@ export default defineConfig({
     react()
   ],
   site: 'https://yashwanth-yasp.github.io',
+  trailingSlash: 'always',
 })
