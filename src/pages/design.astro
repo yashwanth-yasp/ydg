@@ -1,5 +1,4 @@
 ---
-import config from '@/config'
 import Base from '@/layouts/Base.astro'
 import { readdir } from 'fs/promises'
 import { join } from 'path'
@@ -11,7 +10,7 @@ let designImages: string[] = []
 try {
   const files = await readdir(designsDir)
   designImages = files
-    .filter((file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
+    .filter((file: string) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
     .sort()
 } catch (error) {
   console.warn('Designs folder not found or empty')

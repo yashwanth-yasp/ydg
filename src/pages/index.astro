@@ -1,11 +1,6 @@
 ---
 import config from '@/config'
-import { getCollection } from 'astro:content'
-
 import Base from '@/layouts/Base.astro'
-
-const projects = await getCollection('projects')
-const featured = projects.filter((p) => p.data.featured).slice(0, 3)
 ---
 
 <Base meta={{ title: config.title }}>
