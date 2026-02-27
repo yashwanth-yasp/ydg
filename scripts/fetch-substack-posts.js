@@ -28,7 +28,6 @@ async function fetchSubstackPosts() {
 
     console.log(`Found ${feed.items.length} posts`)
 
-    // Limit to 10 most recent posts
     const recentPosts = feed.items.slice(0, 10)
 
     for (const item of recentPosts) {
@@ -40,7 +39,7 @@ async function fetchSubstackPosts() {
 
       const filePath = path.join(POSTS_DIR, `substack-${slug}.md`)
 
-      // Extract date
+      // Extract data
       const pubDate = item.pubDate
         ? new Date(item.pubDate).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -53,12 +52,10 @@ async function fetchSubstackPosts() {
             day: 'numeric'
           })
 
-      // Extract description/summary
       const description = item.contentSnippet
         ? item.contentSnippet.substring(0, 160).replace(/'/g, "\\'")
         : 'A post from Substack'
 
-      // Extract content
       const content = item.content || item.description || ''
 
       const markdown = `---
