@@ -1,0 +1,55 @@
+---
+import config from '@/config'
+import Base from '@/layouts/Base.astro'
+import { readdir } from 'fs/promises'
+import { join } from 'path'
+
+// Get all images from public/designs folder
+const designsDir = join(process.cwd(), 'public/designs')
+let designImages: string[] = []
+
+try {
+  const files = await readdir(designsDir)
+  designImages = files
+    .filter((file) => /\.(jpg|jpeg|png|gif|webp)$/i.test(file))
+    .sort()
+} catch (error) {
+  console.warn('Designs folder not found or empty')
+}
+---
+
+<Base meta={{ title: 'Design' }}>
+  <h2 class="text-2xl font-medium tracking-wide text-lightModeText dark:text-darkModeText w500:text-lg">
+    Design Work
+  </h2>
+
+  <div class="mt-6">
+    {designImages.length > 0 ? (
+      <div class="columns-1 gap-6 space-y-6 sm:columns-2 lg:columns-3">
+        {designImages.map((image) => (
+          <a
+            href={`/designs/${image}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group break-inside-avoid overflow-hidden rounded-lg border border-accentColor/20 transition-transform hover:scale-105 block"
+          >
+            <img
+              src={`/designs/${image}`}
+              alt={image}
+              class="h-auto w-full object-cover"
+            />
+          </a>
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-lg border border-accentColor/20 p-8 text-center">
+        <p class="text-lightModeText dark:text-darkModeText">
+          Add design images to the <code class="bg-accentColor/10 px-2 py-1 rounded">public/designs/</code> folder to display them here.
+        </p>
+        <p class="mt-2 text-sm opacity-80">
+          Supported formats: JPG, PNG, GIF, WebP
+        </p>
+      </div>
+    )}
+  </div>
+</Base>
