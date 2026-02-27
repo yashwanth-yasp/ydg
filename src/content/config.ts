@@ -20,7 +20,8 @@ const projectsCollection = defineCollection({
     link: z.string(),
     startDate: z.string(),
     endDate: z.string().optional(),
-    featured: z.boolean().default(false)
+    featured: z.boolean().default(false),
+    commits: z.number().default(0)
   })
 })
 

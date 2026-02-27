@@ -1,0 +1,38 @@
+name: Update Posts from Substack
+
+on:
+  schedule:
+    # Run every Friday at 12:00 AM UTC
+    - cron: '0 0 * * 5'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  update-posts:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install rss-parser
+          
+      - name: Run Substack fetch script
+        run: node scripts/fetch-substack-posts.js
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add src/content/posts/
+          # Only commit if there are changes
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update posts from Substack" && git push)

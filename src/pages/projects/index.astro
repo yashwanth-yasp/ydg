@@ -5,9 +5,9 @@ import {getCollection} from 'astro:content'
 import Base from '@/layouts/Base.astro'
 
 const projects = await getCollection('projects')
-const sorted = projects.sort(
-    (a,b) => new Date(b.data.startDate).valueOf() - new Date(a.data.startDate).valueOf()
-)
+const topProjects = projects
+  .sort((a, b) => (b.data.commits || 0) - (a.data.commits || 0))
+  .slice(0, 5)
 ---
 
 <Base meta={{ title: 'Projects' }}>
@@ -16,7 +16,7 @@ const sorted = projects.sort(
   </h2>
 
   <div class="mt-6 grid gap-6">
-    {sorted.map((project) => (
+    {topProjects.map((project) => (
       <article class="rounded-lg border border-accentColor/20 p-5">
         <h3 class="text-xl font-semibold">{project.data.title}</h3>
         <p class="mt-2">{project.data.summary}</p>
@@ -25,9 +25,8 @@ const sorted = projects.sort(
         </p>
         <div class="mt-4 flex gap-4">
           {project.data.link && (
-            <a class="underline" href={project.data.link}>Live</a>
+            <a class="underline" href={project.data.link}>View</a>
           )}
-          <a class="underline" href={`/projects/${project.slug}`}>View</a>
         </div>
       </article>
     ))}
