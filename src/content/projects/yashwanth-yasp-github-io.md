@@ -2,9 +2,10 @@
 title: 'yashwanth-yasp.github.io' 
 summary: 'A GitHub project'
 role: 'Developer'
-tech: ['HTML', 'GitHub']
+tech: ['Astro', 'GitHub']
 link: 'https://github.com/yashwanth-yasp/yashwanth-yasp.github.io'
-startDate: 'Oct 2025'
+startDate: 'Feb 2026'
+commits: 11
 featured: false
 ---
 
@@ -16,10 +17,11 @@ No description available
 
 ### Stats
 
+- **Commits:** 11
 - **Stars:** 0
 - **Forks:** 0
-- **Language:** HTML
-- **Last Updated:** 10/9/2025
+- **Language:** Astro
+- **Last Updated:** 2/27/2026
 
 ### Links
 
